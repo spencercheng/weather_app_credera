@@ -9,18 +9,18 @@ const GlobalStyles = createGlobalStyle`
   html,body {
     margin: 0;
     padding: 0;
-    color: white;
+    color: black;
     font-family: Montserrat, sans-serif;
   }
+  
   body {
-    --primaryColor: #425bd8;
     --primaryDarkerColor: #1a2b80;
     --primaryLighterColor: #758CFF;
     --complementaryColor: #EDC855;
-    text-shadow: 0 0 5px hsla(0, 0%, 0%, 0.5);
+    // text-shadow: 0 0 5px hsla(0, 0%, 0%, 0.5);
     min-height: 100vh;
     background-attachment: fixed;
-    background-image: linear-gradient(135deg, var(--primaryColor), var(--primaryDarkerColor));
+    background-image: linear-gradient(to top right, #115DA3, #4ECFED);
   }
   button {
     text-shadow: 0 0 5px hsla(0, 0%, 0%, 0.5);
@@ -51,19 +51,6 @@ const Main = styled.main`
   padding: 25px;
   box-sizing: border-box;
 `;
-const Footer = styled.div`
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  p {
-    color: hsla(0, 0%, 100%, 0.5);
-  }
-  a {
-    opacity: 0.8;
-    color: var(--complementaryColor);
-  }
-`;
 
 function App() {
   const queryClient = new QueryClient();
@@ -76,15 +63,6 @@ function App() {
           <Main>
             <HomePage />
           </Main>
-          <Footer>
-            <p>
-              Weather icons created by Bora DAN. Learn more{" "}
-              <a href="https://dribbble.com/shots/2531876-Weather-Icons-sketch">
-                here
-              </a>
-              .
-            </p>
-          </Footer>
           <ReactQueryDevtools position="bottom-right" />
         </AppWrapper>
       </QueryClientProvider>

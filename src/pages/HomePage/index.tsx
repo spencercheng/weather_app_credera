@@ -20,9 +20,9 @@ export interface Place {
 const HomePage = () => {
   const [metric, setMetric] = useState(true);
   const [place, setPlace] = useState<Place>({
-    latitude: 52.22977,
-    longitude: 21.01178,
-    name: "WARSAW, Masovian, PL",
+    latitude: 40.2338,
+    longitude: 111.6585,
+    name: "Provo, UT",
   });
 
   const { data, isLoading, isError, error } = useWeather(

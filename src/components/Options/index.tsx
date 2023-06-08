@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { Place } from "../../pages/HomePage";
 import SearchPlace from "../../components/SearchPlace";
 import FindMe from "../../components/FindMe";
+import mySvg from "../../assets/weather-icons/wi-celsius.svg";
+import mySvg1 from "../../assets/weather-icons/wi-fahrenheit.svg";
 
 const Bar = styled.nav`
   display: flex;

@@ -7,15 +7,15 @@ import getTime from "../../utils/getTime";
 import WeatherIcon from "../WeatherIcon";
 
 const Wrapper = styled.section`
-  word-break: break-word;
-  background-color: hsla(0, 0%, 0%, 0.1);
-  border-radius: 10px;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  @media screen and (max-width: 750px) {
-    grid-template-columns: 1fr;
-  }
+  // word-break: break-word;
+  // background-color: hsla(0, 0%, 0%, 0.1);
+  // border-radius: 10px;
+  // box-sizing: border-box;
+  // display: grid;
+  // grid-template-columns: 1.5fr 1fr;
+  // @media screen and (max-width: 750px) {
+  //   grid-template-columns: 1fr;
+  // }
 `;
 const Column = styled.div`
   margin: 25px;
@@ -59,14 +59,15 @@ const Location = styled.div`
   }
   .place {
     margin: 0;
-    font-weight: normal;
-    font-size: 2rem;
+    font-weight: 600;
+    font-size: 18px;
+    color: #ffffff;
   }
   .time {
-    font-weight: normal;
+    font-weight: 400;
     margin-top: 0;
-    font-size: 1.2rem;
-    color: var(--complementaryColor);
+    font-size: 14px;
+    color: #ffffff;
   }
 `;
 
@@ -86,8 +87,9 @@ const CurrentWeather: React.FC<Props> = (props) => {
     weekday: "long",
     month: "short",
     day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
+    year: "numeric",
+    // hour: "2-digit",
+    // minute: "2-digit",
   });
   function getCurrentTime(isoDate: string) {
     const date = new Date(isoDate);
@@ -106,75 +108,32 @@ const CurrentWeather: React.FC<Props> = (props) => {
     <Wrapper>
       <Column>
         <Location>
-          <div className="coords">
-            <p>latitude: {props.place.latitude}</p>
-            <p>longitude: {props.place.longitude}</p>
-          </div>
+          <i className="bi bi-geo-alt"></i>
           <h1 className="place">{props.place.name}</h1>
           <h2 className="time">{getCurrentTime(currentWeather.time)}</h2>
-        </Location>
-        <div className="parameters">
-          <p>
-            <i className="bi bi-arrow-up-short"></i>hight:
-            {` ${daily.temperature_2m_max[0]} ${dailyUnits.temperature_2m_max} `}
-            ( apparent:
-            {` ${daily.apparent_temperature_max[0]} ${dailyUnits.apparent_temperature_max} `}
-            )
-          </p>
-          <p>
-            <i className="bi bi-arrow-down-short"></i>low:
-            {` ${daily.temperature_2m_min[0]} ${dailyUnits.temperature_2m_min} `}
-            ( apparent:
-            {` ${daily.apparent_temperature_min[0]} ${dailyUnits.apparent_temperature_min} `}
-            )
-          </p>
-          <p>
-            <i className="bi bi-wind"></i> max wind speed:{" "}
-            {`${daily.windspeed_10m_max[0]} ${dailyUnits.windspeed_10m_max} `}
-          </p>
-          <p>
-            <i className="bi bi-moisture"></i> precipitation:{" "}
-            {` ${daily.precipitation_sum[0]} ${dailyUnits.precipitation_sum} `}
-          </p>
-          <p>
-            <i className="bi bi-cloud-sun"></i> outside:{" "}
+          <p style={{ fontSize: "14px", color: "#65AED5", fontWeight: "600" }}>
             {getWeatherDescr(daily.weathercode[0])}
           </p>
-          <p className="sunTime">
-            <span>
-              <i className="bi bi-sunrise"></i> {getTime(daily.sunrise[0])}
-            </span>
-            <span>
-              <i className="bi bi-sunset"></i> {getTime(daily.sunset[0])}
-            </span>
-          </p>
-        </div>
+        </Location>
       </Column>
       <Column className="right">
         <div className="parameters">
-          <p className="rightNow">right now:</p>
-          <p>
-            <i className="bi bi-cloud-sun"></i> outside:{" "}
-            {getWeatherDescr(currentWeather.weathercode)}
-          </p>
-          <p>
-            <i className="bi bi-thermometer-half"></i> temperature:{" "}
+          <WeatherIcon
+            weatherCode={currentWeather.weathercode}
+            night={checkNight(
+              currentWeather.time,
+              daily.sunrise[0],
+              daily.sunset[0]
+            )}
+            className="image"
+          />
+          <p style={{ fontSize: "48px", color: "#65AED5", fontWeight: "400" }}>
             {`${currentWeather.temperature} ${dailyUnits.temperature_2m_max} `}
           </p>
-          <p>
-            <i className="bi bi-wind"></i> wind speed:{" "}
+          <p style={{ fontSize: "14px", color: "#65AED5", fontWeight: "600" }}>
             {`${currentWeather.windspeed} ${dailyUnits.windspeed_10m_max} `}
           </p>
         </div>
-        <WeatherIcon
-          weatherCode={currentWeather.weathercode}
-          night={checkNight(
-            currentWeather.time,
-            daily.sunrise[0],
-            daily.sunset[0]
-          )}
-          className="image"
-        />
       </Column>
     </Wrapper>
   );
